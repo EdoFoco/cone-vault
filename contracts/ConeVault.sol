@@ -5,24 +5,23 @@ import "../interfaces/ICuboDaoV1.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract ConeVaultV1 {
-    uint256 public tokenDecimals;
-
+    address public owner;
     string public name;
     uint256 public totalDaiInvested;
     uint256 public totalCuboInvested;
     uint256 public daiTarget;
     uint256 public cuboTarget;
-    uint256 public nodeType;
+    uint8 public nodeType;
     address public cuboDaoAddress;
     address public cuboTokenAddress;
     address public daiTokenAddress;
-    uint256 public minInvestableAmount;
     address[] public investorAddresses;
 
     uint256 public mgmtFeePercentage;
     address public mgmtWalletAddress;
-
     bool public isFull;
+    uint256 public tokenDecimals;
+    uint256 public minInvestableAmount;
 
     struct Investor {
         bool exists;
@@ -38,47 +37,28 @@ contract ConeVaultV1 {
         address _cuboDaoAddress,
         address _cuboAddress,
         address _daiAddress,
-        uint256 _nodeType
+        uint8 _nodeType,
+        uint256 _daiTarget,
+        uint256 _cuboTarget,
+        uint256 _mgmtFeePercentage,
+        address _mgmtWallet
     ) {
         require(_nodeType >= 0 && _nodeType <= 4, "Invalid node type");
-
+        owner = msg.sender;
         name = _name;
-        tokenDecimals = 10**18;
         totalCuboInvested = 0;
         totalDaiInvested = 0;
-        isFull = false;
         cuboDaoAddress = _cuboDaoAddress;
         daiTokenAddress = _daiAddress;
         cuboTokenAddress = _cuboAddress;
         nodeType = _nodeType;
-        mgmtWalletAddress = msg.sender;
-
-        if (_nodeType == 0) {
-            daiTarget = 100 * tokenDecimals;
-            cuboTarget = 100 * tokenDecimals;
-            mgmtFeePercentage = 10;
-            minInvestableAmount = 100 / 20;
-        } else if (_nodeType == 1) {
-            daiTarget = 250 * tokenDecimals;
-            cuboTarget = 250 * tokenDecimals;
-            mgmtFeePercentage = 7;
-            minInvestableAmount = 250 / 20;
-        } else if (_nodeType == 2) {
-            daiTarget = 500 * tokenDecimals;
-            cuboTarget = 500 * tokenDecimals;
-            mgmtFeePercentage = 5;
-            minInvestableAmount = 250 / 30;
-        } else if (_nodeType == 3) {
-            daiTarget = 1000 * tokenDecimals;
-            cuboTarget = 1000 * tokenDecimals;
-            mgmtFeePercentage = 5;
-            minInvestableAmount = 1000 / 30;
-        } else if (_nodeType == 4) {
-            daiTarget = 5000 * tokenDecimals;
-            cuboTarget = 5000 * tokenDecimals;
-            mgmtFeePercentage = 5;
-            minInvestableAmount = 5000 / 30;
-        }
+        daiTarget = _daiTarget;
+        cuboTarget = _cuboTarget;
+        mgmtFeePercentage = _mgmtFeePercentage;
+        mgmtWalletAddress = _mgmtWallet;
+        isFull = false;
+        tokenDecimals = 10**18;
+        minInvestableAmount = 1; //_cuboTarget / 300;
     }
 
     function getInvestedAmounts() public view returns (uint256, uint256) {
@@ -133,10 +113,10 @@ contract ConeVaultV1 {
             cuboAmount == daiAmount,
             "CUBO and DAI amounts should be the same"
         );
-        require(
-            cuboAmount < minInvestableAmount || daiAmount < minInvestableAmount,
-            "You haven't reached the minimum investable amount"
-        );
+        // require(
+        //     cuboAmount < minInvestableAmount || daiAmount < minInvestableAmount,
+        //     "You haven't reached the minimum investable amount"
+        // );
 
         require(!isFull, "This vault is already full and invested");
 

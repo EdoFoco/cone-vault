@@ -23,6 +23,5 @@ def daoContract(cuboToken, daiToken, CuboDaoV1, accounts):
     return dao
    
 @pytest.fixture()
-def coneVaultContract(accounts, daoContract, daiToken, cuboToken, ConeVaultV1):
-    return ConeVaultV1.deploy("Test Vault", daoContract, cuboToken, daiToken, 0, {'from': accounts[0]})
-
+def coneVaultContract(accounts, daoContract, daiToken, cuboToken, ConeVaultV1, ):
+    return ConeVaultV1.deploy("Test Vault", daoContract, cuboToken, daiToken, 0, 100*10**18, 100*10**18, 10, accounts[9],{'from': accounts[0]})

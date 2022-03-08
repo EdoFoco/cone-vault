@@ -45,5 +45,3 @@ def test_getInterests_with_more_users(accounts, cuboToken, daiToken, coneVaultCo
    assert amount1 / total_amount * 100 == interests1 / total_interest * 100
    assert amount2 / total_amount * 100 == interests2 / total_interest * 100
    assert mgmt_balance > init_mgmt_balance
-
-   

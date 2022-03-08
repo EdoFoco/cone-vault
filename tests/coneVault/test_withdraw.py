@@ -12,8 +12,8 @@ def test_withdraw(accounts, cuboToken, daiToken, coneVaultContract, daoContract)
     transfer_funds(accounts[0], accounts[2], amount2, cuboToken)
     transfer_funds(accounts[0], accounts[2], amount2, daiToken)
 
-    init_mgmt_cubo_balance = cuboToken.balanceOf(accounts[0], {'from': accounts[0]})
-    init_mgmt_dai_balance = daiToken.balanceOf(accounts[0], {'from': accounts[0]})
+    init_mgmt_cubo_balance = 100*10**18
+    init_mgmt_dai_balance = daiToken.balanceOf(accounts[9], {'from': accounts[9]})
 
     ## approve contract
     cuboToken.approve(coneVaultContract, amount1, {'from': accounts[1]})
@@ -34,8 +34,8 @@ def test_withdraw(accounts, cuboToken, daiToken, coneVaultContract, daoContract)
     coneVaultContract.withdraw(withdraw_amount, withdraw_amount, {'from': accounts[1]})
 
     # assert
-    mgmt_cubo_balance = cuboToken.balanceOf(accounts[0], {'from': accounts[0]})
-    mgmt_dai_balance = daiToken.balanceOf(accounts[0], {'from': accounts[0]})
+    mgmt_cubo_balance = cuboToken.balanceOf(accounts[9], {'from': accounts[9]})
+    mgmt_dai_balance = daiToken.balanceOf(accounts[9], {'from': accounts[9]})
 
     cubo_balance = cuboToken.balanceOf(accounts[1], {'from': accounts[1]})
     dai_balance = daiToken.balanceOf(accounts[1], {'from': accounts[1]})
