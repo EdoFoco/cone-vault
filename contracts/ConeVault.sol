@@ -62,22 +62,22 @@ contract ConeVaultV1 {
             daiTarget = 250 * tokenDecimals;
             cuboTarget = 250 * tokenDecimals;
             mgmtFeePercentage = 7;
-            minInvestableAmount = 250 / 20;
+            minInvestableAmount = 0; // 250 / 20;
         } else if (_nodeType == 2) {
             daiTarget = 500 * tokenDecimals;
             cuboTarget = 500 * tokenDecimals;
             mgmtFeePercentage = 5;
-            minInvestableAmount = 250 / 30;
+            minInvestableAmount = 0; // 250 / 30;
         } else if (_nodeType == 3) {
             daiTarget = 1000 * tokenDecimals;
             cuboTarget = 1000 * tokenDecimals;
             mgmtFeePercentage = 5;
-            minInvestableAmount = 1000 / 30;
+            minInvestableAmount = 0; // 1000 / 30;
         } else if (_nodeType == 4) {
             daiTarget = 5000 * tokenDecimals;
             cuboTarget = 5000 * tokenDecimals;
             mgmtFeePercentage = 5;
-            minInvestableAmount = 5000 / 30;
+            minInvestableAmount = 0; //  5000 / 30;
         }
     }
 
