@@ -12,7 +12,7 @@ def test_getInterests_with_more_users(accounts, cuboToken, daiToken, coneVaultCo
    transfer_funds(accounts[0], accounts[2], amount2, cuboToken)
    transfer_funds(accounts[0], accounts[2], amount2, daiToken)
 
-   init_mgmt_balance = cuboToken.balanceOf(accounts[0], {'from': accounts[0]})
+   init_mgmt_balance = cuboToken.balanceOf(accounts[9], {'from': accounts[9]})
    initial_nodes_count = daoContract.getTotalNodes({'from': accounts[0]})
    
    ## approve contract
@@ -28,10 +28,9 @@ def test_getInterests_with_more_users(accounts, cuboToken, daiToken, coneVaultCo
 
    # act
    txn = coneVaultContract.claimInterests({'from': accounts[2]})
-   print(txn.info())
 
    # assert
-   mgmt_balance = cuboToken.balanceOf(accounts[0], {'from': accounts[0]})
+   mgmt_balance = cuboToken.balanceOf(accounts[9], {'from': accounts[9]})
    interests1 = cuboToken.balanceOf(accounts[1], {'from': accounts[1]})
    interests2 = cuboToken.balanceOf(accounts[2], {'from': accounts[2]})
    claimed1 = coneVaultContract.getClaimedRewards(accounts[1], {'from': accounts[2]})
