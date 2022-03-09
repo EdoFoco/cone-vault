@@ -113,10 +113,10 @@ contract ConeVaultV1 {
             cuboAmount == daiAmount,
             "CUBO and DAI amounts should be the same"
         );
-        // require(
-        //     cuboAmount < minInvestableAmount || daiAmount < minInvestableAmount,
-        //     "You haven't reached the minimum investable amount"
-        // );
+        require(
+            cuboAmount > minInvestableAmount && daiAmount > minInvestableAmount,
+            "You haven't reached the minimum investable amount"
+        );
 
         require(!isFull, "This vault is already full and invested");
 
