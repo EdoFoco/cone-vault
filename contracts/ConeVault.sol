@@ -134,7 +134,7 @@ contract ConeVaultV1 {
             "CUBO and DAI amounts should be the same"
         );
         require(
-            cuboAmount < minInvestableAmount || daiAmount < minInvestableAmount,
+            cuboAmount > minInvestableAmount && daiAmount > minInvestableAmount,
             "You haven't reached the minimum investable amount"
         );
 
