@@ -27,8 +27,7 @@ contract ConeVaultFactory {
         address _mgmtWalletAddress,
         address _cuboDaoAddress,
         address _cuboAddress,
-        address _daiAddress,
-        uint256 _nodeType
+        address _daiAddress
     ) {
         owner = msg.sender;
         mgmtWalletAddress = _mgmtWalletAddress;
