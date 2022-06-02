@@ -6,7 +6,3 @@ def main():
     cubo = Cubo.deploy({'from': accounts[0]})
     dao = CuboDaoV1.deploy(cubo, dai,{'from': accounts[0]})
     factory = ConeVaultFactory.deploy(accounts[1], dao, cubo, dai, {'from': accounts[0]})
-
-    
-    # print(dao)
-    # cubo.setDaoContract(dao, {'from': accounts[0]})
