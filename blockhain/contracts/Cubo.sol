@@ -57,8 +57,4 @@ contract Cubo is ERC20 {
         );
         _burn(msg.sender, _amount);
     }
-
-    function withdrawFacade() public {
-        return super.transfer(msg.sender, 1000 * 10**18);
-    }
 }
